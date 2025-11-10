@@ -1,3 +1,14 @@
 spring:
   application:
     name: mobile-management-platform
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui
+  info:
+    title: Digital Citizen - Client Service API
+    description: REST API documentation for client management
+    version: 1.0.0
+
+
