@@ -1,13 +1,13 @@
-package com.tfg.digitalcitizen.mobilemanagementplatform;
+package com.tfg.digitalcitizen.platform;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MobileManagementPlatformApplication {
+public class MobileManagementPlatformApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MobileManagementPlatformApplication.class, args);
+		SpringApplication.run(MobileManagementPlatformApp.class, args);
 	}
 
 }
