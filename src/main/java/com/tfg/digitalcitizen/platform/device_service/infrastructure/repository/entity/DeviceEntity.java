@@ -29,7 +29,7 @@ public class DeviceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // --- Campos del dominio ---
+    // Campos del dominio
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
@@ -57,7 +57,7 @@ public class DeviceEntity {
     @Column(nullable = false)
     private LocalDate activationDate;
 
-    // --- Relaciones lógicas (NO FK entre microservicios) ---
+    // Relaciones lógicas (NO FK entre microservicios)
 
     @Column(nullable = false)
     private Long clientId;

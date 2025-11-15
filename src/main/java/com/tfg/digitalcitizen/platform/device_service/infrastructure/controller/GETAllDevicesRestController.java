@@ -7,6 +7,7 @@ import com.tfg.digitalcitizen.platform.device_service.application.model.DevicesU
 import com.tfg.digitalcitizen.platform.device_service.infrastructure.controller.dto.DevicesResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,10 @@ public class GETAllDevicesRestController {
     private final GETAllDevicesUseCase useCase;
 
     @Operation(summary = "Get all devices")
-    @ApiResponse(responseCode = "200", description = "Devices found successfully")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Devices found successfully"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping("/devices")
     public ResponseEntity<DevicesResponse> findAll() {
 
@@ -32,9 +36,7 @@ public class GETAllDevicesRestController {
                 .toList();
 
         return ResponseEntity.ok(
-                new DevicesResponse(dtoList,
-                        devicesResponse.getTotalDevices(),
-                        devicesResponse.getTotalDevicesFiltered())
+                new DevicesResponse(dtoList, devicesResponse.getTotalDevices(), devicesResponse.getTotalDevicesFiltered())
         );
     }
 }

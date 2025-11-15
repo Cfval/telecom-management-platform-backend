@@ -4,7 +4,7 @@ import com.tfg.digitalcitizen.platform.client_service.core.model.Client;
 import com.tfg.digitalcitizen.platform.client_service.core.ports.ClientRepositoryPort;
 import com.tfg.digitalcitizen.platform.client_service.infrastructure.repository.JpaClientRepository;
 import com.tfg.digitalcitizen.platform.client_service.infrastructure.repository.entity.ClientEntity;
-import com.tfg.digitalcitizen.platform.client_service.infrastructure.repository.mappers.ClientEntityMapper;
+import com.tfg.digitalcitizen.platform.client_service.infrastructure.repository.mapper.ClientEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

@@ -31,6 +31,10 @@ public final class Device {
     public Long lineId() { return lineId; }
     public Long employeeId() { return employeeId; }
 
+    // Enum getters
+    public DeviceType typeEnum() { return this.type;}
+    public DeviceStatus statusEnum() { return this.status; }
+
     // --- Constructor privado ---
     private Device(Long id, DeviceType type, String imei, String brand, String model,
                    String serialNumber, String os, DeviceStatus status, LocalDate activationDate,

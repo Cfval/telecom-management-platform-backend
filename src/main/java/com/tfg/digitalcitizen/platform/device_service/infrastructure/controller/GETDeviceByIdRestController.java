@@ -6,6 +6,9 @@ import com.tfg.digitalcitizen.platform.device_service.application.mapper.DeviceM
 import com.tfg.digitalcitizen.platform.device_service.application.model.DeviceByIdUseCaseResponse;
 import com.tfg.digitalcitizen.platform.device_service.infrastructure.controller.dto.DeviceResponse;
 import com.tfg.digitalcitizen.platform.device_service.infrastructure.exceptions.DeviceNotFoundException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,13 @@ public class GETDeviceByIdRestController {
 
     private final GETDeviceByIdUseCase useCase;
 
+    @Operation(summary = "Get a device by ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Device found successfully"),
+            @ApiResponse(responseCode = "404", description = "Device not found"),
+            @ApiResponse(responseCode = "400", description = "Invalid ID format"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping("/devices/{id}")
     public ResponseEntity<DeviceResponse> findById(@PathVariable Long id) {
 

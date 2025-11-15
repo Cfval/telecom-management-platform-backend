@@ -1,4 +1,4 @@
-package com.tfg.digitalcitizen.platform.device_service.infrastructure.repository.mappers;
+package com.tfg.digitalcitizen.platform.device_service.infrastructure.repository.mapper;
 
 import com.tfg.digitalcitizen.platform.device_service.core.model.Device;
 import com.tfg.digitalcitizen.platform.device_service.core.model.DeviceStatus;
@@ -9,36 +9,33 @@ public final class DeviceEntityMapper {
 
     private DeviceEntityMapper() {}
 
-
-    // Domain → Entity
-    public static DeviceEntity toEntity(Device device) {
+    public static DeviceEntity toEntity(Device domain) {
         return new DeviceEntity(
-                device.id(),
-                DeviceType.valueOf(device.type().toUpperCase()),   // ENUM real
-                device.imei(),
-                device.brand(),
-                device.model(),
-                device.serialNumber(),
-                device.os(),
-                DeviceStatus.valueOf(device.status().toUpperCase()), // ENUM real
-                device.activationDate(),
-                device.clientId(),
-                device.lineId(),
-                device.employeeId()
+                domain.id(),
+                domain.typeEnum(),              // ENUM directo
+                domain.imei(),
+                domain.brand(),
+                domain.model(),
+                domain.serialNumber(),
+                domain.os(),
+                domain.statusEnum(),            // ENUM directo
+                domain.activationDate(),
+                domain.clientId(),
+                domain.lineId(),
+                domain.employeeId()
         );
     }
 
-    // Entity → Domain
     public static Device toDomain(DeviceEntity entity) {
         return Device.fromPrimitives(
                 entity.getId(),
-                entity.getType(),             // DeviceType ENUM
+                entity.getType(),              // ENUM directo
                 entity.getImei(),
                 entity.getBrand(),
                 entity.getModel(),
                 entity.getSerialNumber(),
                 entity.getOs(),
-                entity.getStatus(),           // DeviceStatus ENUM
+                entity.getStatus(),            // ENUM directo
                 entity.getActivationDate(),
                 entity.getClientId(),
                 entity.getLineId(),
@@ -46,4 +43,5 @@ public final class DeviceEntityMapper {
         );
     }
 }
+
 

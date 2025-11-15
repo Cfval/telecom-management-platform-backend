@@ -5,7 +5,7 @@ import com.tfg.digitalcitizen.platform.shared.domain.valueobject.NullableStringV
 public class SIMType extends NullableStringValueObject {
 
     public static final SIMType EMPTY = new SIMType("-");
-    private static final String VALID_PATTERN = "^(SIM|ESIM|DUAL SIM|-)$";
+    private static final String VALID_PATTERN = "^(SIM|ESIM|DUAL SIM|MULTISIM |-)$";
 
     private SIMType(String value) {
         super(value);
