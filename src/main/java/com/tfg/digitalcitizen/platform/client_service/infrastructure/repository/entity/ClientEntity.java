@@ -26,7 +26,7 @@ public class ClientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 120)
+    @Column(nullable = false, unique = true, length = 120)
     private String companyName;
 
     @Column(nullable = false, unique = true, length = 16)
@@ -35,7 +35,7 @@ public class ClientEntity {
     @Column(nullable = false, unique = true, length = 180)
     private String email;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, unique = true, length = 20)
     private String phoneNumber;
 
     @Column(nullable = false, length = 300)

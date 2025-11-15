@@ -1,4 +1,4 @@
-package com.tfg.digitalcitizen.platform.client_service.infrastructure.repository.mappers;
+package com.tfg.digitalcitizen.platform.client_service.infrastructure.repository.mapper;
 
 import com.tfg.digitalcitizen.platform.client_service.core.model.Client;
 import com.tfg.digitalcitizen.platform.client_service.core.model.ClientStatus;
@@ -19,7 +19,7 @@ public final class ClientEntityMapper {
                 entity.getPhoneNumber(),
                 entity.getAddress(),
                 entity.getRegistrationDate(),
-                entity.getStatus()
+                entity.getStatus()                  // ENUM directo
         );
     }
 

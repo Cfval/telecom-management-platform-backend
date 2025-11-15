@@ -5,7 +5,7 @@ import com.tfg.digitalcitizen.platform.device_service.core.model.DeviceStatus;
 import com.tfg.digitalcitizen.platform.device_service.core.ports.DeviceRepositoryPort;
 import com.tfg.digitalcitizen.platform.device_service.infrastructure.repository.JpaDeviceRepository;
 import com.tfg.digitalcitizen.platform.device_service.infrastructure.repository.entity.DeviceEntity;
-import com.tfg.digitalcitizen.platform.device_service.infrastructure.repository.mappers.DeviceEntityMapper;
+import com.tfg.digitalcitizen.platform.device_service.infrastructure.repository.mapper.DeviceEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

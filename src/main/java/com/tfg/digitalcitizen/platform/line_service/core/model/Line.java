@@ -26,6 +26,9 @@ public final class Line {
     public Long employeeId() { return employeeId; }
     public Long deviceId() { return deviceId; }
 
+    // Enum getter
+    public LineStatus statusEnum() { return this.status; }
+
     // --- Constructor privado ---
     private Line(Long id, String phoneNumber, String tariffType, LocalDate activationDate,
                  SIMCard simCard, LineStatus status, Long clientId, Long employeeId, Long deviceId) {
@@ -98,7 +101,6 @@ public final class Line {
                 deviceId
         );
     }
-
 }
 
 

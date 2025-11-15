@@ -67,5 +67,21 @@ public final class User {
                 this.department.toPrimitive(), this.registrationDate,
                 UserStatus.INACTIVE, this.role.toPrimitive(), this.clientId, this.lineId);
     }
+
+    public User updateData(String fullName, String email, String department, UserStatus status,
+                           String role, Long clientId, Long lineId) {
+        return new User(
+                this.id,
+                fullName,
+                email,
+                department,
+                this.registrationDate,   // NO se modifica
+                status,
+                role,
+                clientId,
+                lineId
+        );
+    }
+
 }
 
