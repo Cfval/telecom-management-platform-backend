@@ -25,8 +25,11 @@ public interface DeviceRepositoryPort {
     List<Device> findByStatus(DeviceStatus status);
 
     // Obtener todos los dispositivos asignados a un empleado específico
-    // (GET /devices/by-employee/{employeeId})
+    // (GET /devices/employee/{employeeId})
     List<Device> findByEmployeeId(Long employeeId);
+
+    // (GET /devices/client/{clientId})
+    List<Device> findByClientId(Long clientId);
 }
 
 

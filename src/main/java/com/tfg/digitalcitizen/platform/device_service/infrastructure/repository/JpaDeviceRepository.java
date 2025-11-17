@@ -11,5 +11,7 @@ public interface JpaDeviceRepository extends JpaRepository<DeviceEntity, Long> {
     List<DeviceEntity> findByStatus(DeviceStatus status);
 
     List<DeviceEntity> findByEmployeeId(Long employeeId);
+
+    List<DeviceEntity> findByClientId(Long clientId);
 }
 

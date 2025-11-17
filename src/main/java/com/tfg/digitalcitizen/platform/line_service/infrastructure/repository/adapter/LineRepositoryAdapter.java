@@ -1,5 +1,7 @@
 package com.tfg.digitalcitizen.platform.line_service.infrastructure.repository.adapter;
 
+import com.tfg.digitalcitizen.platform.device_service.core.model.Device;
+import com.tfg.digitalcitizen.platform.device_service.infrastructure.repository.mapper.DeviceEntityMapper;
 import com.tfg.digitalcitizen.platform.line_service.core.model.Line;
 import com.tfg.digitalcitizen.platform.line_service.core.model.LineStatus;
 import com.tfg.digitalcitizen.platform.line_service.core.ports.LineRepositoryPort;
@@ -54,6 +56,13 @@ public class LineRepositoryAdapter implements LineRepositoryPort {
     @Override
     public List<Line> findActiveLines() {
         return jpaRepository.findByStatus(LineStatus.ACTIVE).stream()
+                .map(LineEntityMapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Line> findByClientId(Long clientId) {
+        return jpaRepository.findByClientId(clientId).stream()
                 .map(LineEntityMapper::toDomain)
                 .collect(Collectors.toList());
     }

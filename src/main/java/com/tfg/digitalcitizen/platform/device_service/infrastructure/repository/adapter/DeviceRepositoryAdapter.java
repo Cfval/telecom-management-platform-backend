@@ -64,5 +64,12 @@ public class DeviceRepositoryAdapter implements DeviceRepositoryPort {
                 .map(DeviceEntityMapper::toDomain)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Device> findByClientId(Long clientId) {
+        return jpaRepository.findByClientId(clientId).stream()
+                .map(DeviceEntityMapper::toDomain)
+                .collect(Collectors.toList());
+    }
 }
 
