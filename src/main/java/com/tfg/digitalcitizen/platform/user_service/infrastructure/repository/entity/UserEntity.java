@@ -28,7 +28,7 @@ public class UserEntity {
     private Long id;
 
     // ValueObjects → strings en DB
-    @Column(nullable = false, unique = true, length = 150)
+    @Column(nullable = false, length = 150)
     private String fullName;
 
     @Column(nullable = false, unique = true, length = 180)

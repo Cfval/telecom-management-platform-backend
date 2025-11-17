@@ -8,36 +8,84 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 @Configuration
 public class ClientDataLoader {
+
+    private static final Random random = new Random();
+
+    // 15 nombres de empresas modernas y realistas
+    private static final String[] COMPANY_NAMES = {"BlueTech Solutions", "InnovaSoft", "Digital Nexus",
+            "PrimeData Systems", "CyberWorks Studios", "SmartSystems Corp", "Skyline Technologies",
+            "Vertex Global", "FutureNet Labs", "Apex Digital Group", "BrightWave IT", "NeonSoft Innovations",
+            "Orion Data Group", "Solstice IT Partners", "Quantum Corp"
+    };
+
+    private static final String[] STREETS = {
+            "Europa", "Alicante", "Valencia", "Camino de la Virgen", "Onil",
+            "Barrios bajos", "Oceano", "La Mancha", "Castilla", "Zapatero"
+    };
 
     @Bean
     CommandLineRunner initClientsDatabase(ClientRepositoryPort repository) {
         return args -> {
 
-            if (repository.findAll().isEmpty()) {
-                repository.save(Client.fromPrimitives(
-                        "Digital Citizen S.L.", "B12345678", "info@digitalcitizen.io",
-                        "600123456", "Av. Alicante 45, Madrid",
-                        LocalDate.now(), ClientStatus.ACTIVE));
-
-                repository.save(Client.fromPrimitives(
-                        "BlueTech Corp", "B87654321", "contact@bluetech.com",
-                        "699998877", "Calle Futuro 9, Barcelona",
-                        LocalDate.now(), ClientStatus.ACTIVE));
-
-                repository.save(Client.fromPrimitives(
-                        "InnovaSoft", "B11223344", "hello@innovasoft.es",
-                        "611222333", "Av. Europa 12, Valencia",
-                        LocalDate.now(), ClientStatus.INACTIVE));
-
-                System.out.println("Datos iniciales de clientes cargados correctamente en la base de datos.");
-            } else {
-                System.out.println("Base de datos ya contiene clientes. No se realizó la precarga.");
+            if (!repository.findAll().isEmpty()) {
+                System.out.println("Base de datos ya contiene clientes. Precarga omitida.");
+                return;
             }
+
+            int totalClients = 15;
+            System.out.println("Generando " + totalClients + " empresas cliente...");
+
+            for (int i = 1; i <= totalClients; i++) {
+
+                String companyName = COMPANY_NAMES[i - 1] + " S.L.";
+                String cif = generateCif(i);
+                String email = "contact@client" + i + ".com";
+                String phone = generatePhone(i);
+                String address = generateAddress();
+
+                LocalDate registrationDate = LocalDate.now().minusDays(random.nextInt(1500));
+
+                ClientStatus status = (random.nextInt(100) < 70)
+                        ? ClientStatus.ACTIVE
+                        : ClientStatus.INACTIVE;
+
+                repository.save(Client.fromPrimitives(
+                        companyName,
+                        cif,
+                        email,
+                        phone,
+                        address,
+                        registrationDate,
+                        status
+                ));
+            }
+
+            System.out.println("Clientes generados correctamente.");
         };
     }
+
+    // ==========================================================
+    // HELPERS
+    // ==========================================================
+
+    private String generateCif(int i) {
+        return "B" + String.format("%08d", 10_000_000 + i);
+    }
+
+    private String generatePhone(int i) {
+        return "6" + String.format("%08d", i);
+    }
+
+    private String generateAddress() {
+        String street = STREETS[random.nextInt(STREETS.length)];
+        int number = 10 + random.nextInt(90);
+        return "Calle " + street + " nº " + number;
+    }
 }
+
 
 
