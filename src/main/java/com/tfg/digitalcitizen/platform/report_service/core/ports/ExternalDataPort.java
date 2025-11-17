@@ -1,20 +1,18 @@
 package com.tfg.digitalcitizen.platform.report_service.core.ports;
 
+import com.tfg.digitalcitizen.platform.report_service.core.model.summary.*;
+
 import java.util.List;
-import java.util.Map;
 
 public interface ExternalDataPort {
 
-    // Consultar resumen de clientes
-    List<Map<String, Object>> getClientsSummary();
+    List<ClientSummary> getClients();
 
-    // Consultar líneas activas por cliente
-    List<Map<String, Object>> getActiveLinesByClient(Long clientId);
+    List<UserSummary> getUsersByClient(Long clientId);
 
-    // Consultar dispositivos por cliente
-    List<Map<String, Object>> getDevicesByClient(Long clientId);
+    List<DeviceSummary> getDevicesByClient(Long clientId);
 
-    // Consultar empleados activos por cliente
-    List<Map<String, Object>> getUsersByClient(Long clientId);
+    List<LineSummary> getLinesByClient(Long clientId);
 }
+
 

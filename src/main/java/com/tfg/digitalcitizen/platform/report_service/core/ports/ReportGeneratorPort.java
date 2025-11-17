@@ -1,18 +1,22 @@
 package com.tfg.digitalcitizen.platform.report_service.core.ports;
 
-import com.tfg.digitalcitizen.platform.report_service.core.model.ReportData;
-import com.tfg.digitalcitizen.platform.report_service.core.model.ClientReport;
+import com.tfg.digitalcitizen.platform.report_service.core.model.*;
+
 import java.util.List;
 
 public interface ReportGeneratorPort {
 
-    // Informe general del sistema
-    ReportData generateSystemReport();
+    SystemReport generateSystemReport();
 
-    // Informe detallado por cliente
     ClientReport generateClientReport(Long clientId);
 
-    // Informe agregado de todos los clientes
     List<ClientReport> generateAllClientReports();
+
+    // reportes específicos para un cliente
+    DeviceHealthReport generateDeviceHealthReport(Long clientId);
+
+    LineUsageReport generateLineUsageReport(Long clientId);
 }
+
+
 

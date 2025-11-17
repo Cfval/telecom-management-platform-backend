@@ -9,4 +9,6 @@ import java.util.List;
 public interface JpaLineRepository extends JpaRepository<LineEntity, Long> {
 
     List<LineEntity> findByStatus(LineStatus status);
+
+    List<LineEntity> findByClientId(Long clientId);
 }

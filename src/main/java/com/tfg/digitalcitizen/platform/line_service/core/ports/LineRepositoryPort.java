@@ -1,5 +1,6 @@
 package com.tfg.digitalcitizen.platform.line_service.core.ports;
 
+import com.tfg.digitalcitizen.platform.device_service.core.model.Device;
 import com.tfg.digitalcitizen.platform.line_service.core.model.Line;
 import java.util.*;
 
@@ -22,5 +23,9 @@ public interface LineRepositoryPort {
 
     // Obtener todas las líneas activas (GET /lines/active)
     List<Line> findActiveLines();
+
+    // (GET /devices/client/{clientId})
+    List<Line> findByClientId(Long clientId);
+
 }
 
