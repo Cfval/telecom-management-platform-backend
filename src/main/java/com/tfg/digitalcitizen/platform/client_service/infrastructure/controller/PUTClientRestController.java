@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class PUTClientRestController {
             @ApiResponse(responseCode = "400", description = "Invalid input")
     })
     @PutMapping("/clients/{id}")
-    public ResponseEntity<ApiSuccessResponse<ClientDto>> update(@PathVariable Long id, @RequestBody ClientDto dto,
+    public ResponseEntity<ApiSuccessResponse<ClientDto>> update(@PathVariable Long id, @Valid @RequestBody ClientDto dto,
                                                                 HttpServletRequest request) {
 
         ClientDto updated = useCase.invoke(id, dto);

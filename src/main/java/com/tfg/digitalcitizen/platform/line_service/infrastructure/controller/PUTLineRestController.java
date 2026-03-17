@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +27,7 @@ public class PUTLineRestController {
             @ApiResponse(responseCode = "404", description = "Line not found")
     })
     @PutMapping("/lines/{id}")
-    public ResponseEntity<ApiSuccessResponse<LineDto>> update(@PathVariable Long id, @RequestBody LineDto dto,
+    public ResponseEntity<ApiSuccessResponse<LineDto>> update(@PathVariable Long id, @Valid @RequestBody LineDto dto,
                                                               HttpServletRequest request) {
 
         LineDto updated = useCase.invoke(id, dto);

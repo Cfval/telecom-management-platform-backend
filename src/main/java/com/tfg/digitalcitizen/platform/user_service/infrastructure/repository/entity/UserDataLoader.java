@@ -3,6 +3,7 @@ package com.tfg.digitalcitizen.platform.user_service.infrastructure.repository.e
 import com.tfg.digitalcitizen.platform.user_service.core.model.User;
 import com.tfg.digitalcitizen.platform.user_service.core.model.UserStatus;
 import com.tfg.digitalcitizen.platform.user_service.core.ports.UserRepositoryPort;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import java.time.LocalDate;
 import java.util.Random;
 
+@Slf4j
 @Configuration
 public class UserDataLoader {
 
@@ -38,12 +40,12 @@ public class UserDataLoader {
         return args -> {
 
             if (!repository.findAll().isEmpty()) {
-                System.out.println("Base de datos ya contiene usuarios. Precarga omitida.");
+                log.info("Database already contains users. Skipping data load.");
                 return;
             }
 
             int totalUsers = 150;
-            System.out.println("Generando " + totalUsers + " usuarios aleatorios...");
+            log.info("Generating {} random users...", totalUsers);
 
             for (int i = 1; i <= totalUsers; i++) {
 
@@ -56,7 +58,6 @@ public class UserDataLoader {
                 // Email using domain by client
                 String email = generateEmail(fullName, clientId, i);
 
-                // Department (80% con departamento)
                 String department = randomDepartment();
 
                 // Registration date
@@ -68,7 +69,6 @@ public class UserDataLoader {
                 // Role
                 String role = randomRole();
 
-                // LineId (solo si ACTIVE, 40% probabilidad)
                 Long lineId = assignLineId(status);
 
                 repository.save(User.fromPrimitives(
@@ -83,7 +83,7 @@ public class UserDataLoader {
                 ));
             }
 
-            System.out.println("Usuarios generados correctamente.");
+            log.info("Users generated successfully.");
         };
     }
 
@@ -101,14 +101,14 @@ public class UserDataLoader {
         String normalized = normalize(fullName)
                 .toLowerCase()
                 .replace(" ", ".")
-                .replaceAll("[^a-z0-9._-]", ""); // solo caracteres válidos
+                .replaceAll("[^a-z0-9._-]", "");
 
         return normalized + unique + "@client" + clientId + ".com";
     }
 
     private String normalize(String text) {
         String norm = java.text.Normalizer.normalize(text, java.text.Normalizer.Form.NFD);
-        return norm.replaceAll("\\p{InCombiningDiacriticalMarks}+", ""); // elimina tildes
+        return norm.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
 
     private String randomDepartment() {
@@ -135,8 +135,8 @@ public class UserDataLoader {
     private Long assignLineId(UserStatus status) {
         if (status != UserStatus.ACTIVE) return null;
 
-        if (random.nextInt(100) < 40) { // 40% asignados
-            return (long) (1 + random.nextInt(250)); // 1..250
+        if (random.nextInt(100) < 40) {
+            return (long) (1 + random.nextInt(250));
         }
         return null;
     }

@@ -7,7 +7,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +25,10 @@ public class POSTClientRestController {
             @ApiResponse(responseCode = "400", description = "Invalid client data")
     })
     @PostMapping("/clients")
-    public ResponseEntity<ApiSuccessResponse<ClientDto>> create(@RequestBody ClientDto dto, HttpServletRequest request) {
+    public ResponseEntity<ApiSuccessResponse<ClientDto>> create(@Valid @RequestBody ClientDto dto, HttpServletRequest request) {
 
         ClientDto saved = useCase.invoke(dto);
 
-        return ResponseEntity.status(201).body(ApiSuccessResponse.of(saved, 201, request.getRequestURI()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiSuccessResponse.of(saved, 201, request.getRequestURI()));
     }
 }

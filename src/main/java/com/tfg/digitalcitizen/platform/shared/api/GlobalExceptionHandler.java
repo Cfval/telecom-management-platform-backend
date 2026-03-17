@@ -2,6 +2,7 @@ package com.tfg.digitalcitizen.platform.shared.api;
 
 import com.tfg.digitalcitizen.platform.shared.exception.NotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -109,8 +111,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiErrorResponse> handleDatabaseException(
             DataAccessException ex, HttpServletRequest request
     ) {
+        log.error("Database error at {}: {}", request.getRequestURI(), ex.getMessage(), ex);
         ApiErrorResponse response = ApiErrorResponse.of(
-                "Database error: " + ex.getMessage(),
+                "A database error occurred. Please try again later.",
                 HttpStatus.SERVICE_UNAVAILABLE.value(),
                 request.getRequestURI()
         );
@@ -123,8 +126,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiErrorResponse> handleGeneralError(
             Exception ex, HttpServletRequest request
     ) {
+        log.error("Unexpected error at {}: {}", request.getRequestURI(), ex.getMessage(), ex);
         ApiErrorResponse response = ApiErrorResponse.of(
-                "Internal server error: " + ex.getMessage(),
+                "An unexpected error occurred.",
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 request.getRequestURI()
         );

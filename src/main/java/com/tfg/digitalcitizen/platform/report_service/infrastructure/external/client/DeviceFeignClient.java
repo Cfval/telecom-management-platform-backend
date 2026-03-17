@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 import java.util.Map;
 
-@FeignClient(name = "device-service", url = "http://localhost:8080")
+@FeignClient(name = "device-service", url = "${services.device-url}")
 public interface DeviceFeignClient {
 
     @GetMapping("/devices/client/{clientId}")

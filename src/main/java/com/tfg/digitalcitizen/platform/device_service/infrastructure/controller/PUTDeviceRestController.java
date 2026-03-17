@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class PUTDeviceRestController {
             @ApiResponse(responseCode = "404", description = "Device not found")
     })
     @PutMapping("/devices/{id}")
-    public ResponseEntity<ApiSuccessResponse<DeviceDto>> update(@PathVariable Long id, @RequestBody DeviceDto dto,
+    public ResponseEntity<ApiSuccessResponse<DeviceDto>> update(@PathVariable Long id, @Valid @RequestBody DeviceDto dto,
                                                                 HttpServletRequest request) {
 
         DeviceDto updated = useCase.invoke(id, dto);

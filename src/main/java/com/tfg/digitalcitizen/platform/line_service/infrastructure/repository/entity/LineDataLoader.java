@@ -4,6 +4,7 @@ import com.tfg.digitalcitizen.platform.line_service.core.model.Line;
 import com.tfg.digitalcitizen.platform.line_service.core.model.LineStatus;
 import com.tfg.digitalcitizen.platform.line_service.core.model.simcard.SIMCard;
 import com.tfg.digitalcitizen.platform.line_service.core.ports.LineRepositoryPort;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import java.time.LocalDate;
 import java.util.Random;
 
+@Slf4j
 @Configuration
 public class LineDataLoader {
 
@@ -29,12 +31,12 @@ public class LineDataLoader {
         return args -> {
 
             if (!repository.findAll().isEmpty()) {
-                System.out.println("La base de datos ya contiene líneas. Precarga omitida.");
+                log.info("Database already contains lines. Skipping data load.");
                 return;
             }
 
             int totalLines = 250;
-            System.out.println("Generando " + totalLines + " líneas aleatorias...");
+            log.info("Generating {} random lines...", totalLines);
 
             for (int i = 1; i <= totalLines; i++) {
 
@@ -62,7 +64,7 @@ public class LineDataLoader {
                 ));
             }
 
-            System.out.println("Líneas generadas correctamente.");
+            log.info("Lines generated successfully.");
         };
     }
 
@@ -97,9 +99,8 @@ public class LineDataLoader {
     }
 
     private String randomICCID(int i) {
-        // Siempre ICCID de 19 digitos empezando con "893450"
-        String prefix = "893450"; // MNC/MCC prefijo fijo para España y operador ficticio
-        String mid = String.format("%013d", i); // asegura longitud total = 6 + 13 = 19
+        String prefix = "893450";
+        String mid = String.format("%013d", i);
         return prefix + mid;
     }
 
@@ -127,8 +128,8 @@ public class LineDataLoader {
     private Long assignEmployeeId(LineStatus status) {
         if (status != LineStatus.ACTIVE) return null;
 
-        if (random.nextInt(100) < 60) { // 60% asignadas a empleado
-            return (long) (1 + random.nextInt(150)); // 1..150
+        if (random.nextInt(100) < 60) {
+            return (long) (1 + random.nextInt(150));
         }
         return null;
     }
@@ -137,8 +138,8 @@ public class LineDataLoader {
         if (status != LineStatus.ACTIVE) return null;
         if (employeeId == null) return null;
 
-        if (random.nextInt(100) < 70) { // 70% con dispositivo
-            return (long) (1 + random.nextInt(200)); // 1..200
+        if (random.nextInt(100) < 70) {
+            return (long) (1 + random.nextInt(200));
         }
         return null;
     }

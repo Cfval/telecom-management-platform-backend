@@ -1,7 +1,7 @@
 
 package com.tfg.digitalcitizen.platform.shared.valueobject;
 
-import io.micrometer.common.util.StringUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.Optional;
 
@@ -12,6 +12,8 @@ public class NonNullableStringValueObject extends ValueObject<String> {
     }
 
     protected String validate(String value) {
-        return Optional.ofNullable(value).filter(StringUtils::isNotBlank).orElseThrow();
+        return Optional.ofNullable(value)
+                .filter(StringUtils::hasText)
+                .orElseThrow(() -> new IllegalArgumentException("Value cannot be null or blank"));
     }
 }

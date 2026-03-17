@@ -3,6 +3,7 @@ package com.tfg.digitalcitizen.platform.client_service.infrastructure.repository
 import com.tfg.digitalcitizen.platform.client_service.core.model.Client;
 import com.tfg.digitalcitizen.platform.client_service.core.model.ClientStatus;
 import com.tfg.digitalcitizen.platform.client_service.core.ports.ClientRepositoryPort;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import java.time.LocalDate;
 import java.util.Random;
 
+@Slf4j
 @Configuration
 public class ClientDataLoader {
 
@@ -32,12 +34,12 @@ public class ClientDataLoader {
         return args -> {
 
             if (!repository.findAll().isEmpty()) {
-                System.out.println("Base de datos ya contiene clientes. Precarga omitida.");
+                log.info("Database already contains clients. Skipping data load.");
                 return;
             }
 
             int totalClients = 15;
-            System.out.println("Generando " + totalClients + " empresas cliente...");
+            log.info("Generating {} client companies...", totalClients);
 
             for (int i = 1; i <= totalClients; i++) {
 
@@ -64,7 +66,7 @@ public class ClientDataLoader {
                 ));
             }
 
-            System.out.println("Clientes generados correctamente.");
+            log.info("Clients generated successfully.");
         };
     }
 

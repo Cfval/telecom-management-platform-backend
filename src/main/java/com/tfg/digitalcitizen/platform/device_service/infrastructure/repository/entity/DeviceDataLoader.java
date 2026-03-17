@@ -2,6 +2,7 @@ package com.tfg.digitalcitizen.platform.device_service.infrastructure.repository
 
 import com.tfg.digitalcitizen.platform.device_service.core.model.*;
 import com.tfg.digitalcitizen.platform.device_service.core.ports.DeviceRepositoryPort;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import java.time.LocalDate;
 import java.util.Random;
 
+@Slf4j
 @Configuration
 public class DeviceDataLoader {
 
@@ -44,18 +46,18 @@ public class DeviceDataLoader {
         return args -> {
 
             if (!repository.findAll().isEmpty()) {
-                System.out.println("La base de datos ya contiene dispositivos. Precarga omitida.");
+                log.info("Database already contains devices. Skipping data load.");
                 return;
             }
 
             int totalDevices = 200;
-            System.out.println("Generando " + totalDevices + " dispositivos aleatorios...");
+            log.info("Generating {} random devices...", totalDevices);
 
             for (int i = 1; i <= totalDevices; i++) {
 
                 DeviceType type = randomDeviceType();
 
-                String imei = generateImei(i); // siempre 15 dígitos únicos
+                String imei = generateImei(i);
 
                 String brand = randomBrand();
                 String model = randomModel(type, brand);
@@ -84,7 +86,7 @@ public class DeviceDataLoader {
                 ));
             }
 
-            System.out.println("Dispositivos generados correctamente.");
+            log.info("Devices generated successfully.");
         };
     }
 
@@ -132,10 +134,9 @@ public class DeviceDataLoader {
     }
 
     private String generateImei(int i) {
-        // IMEI de 15 dígitos: "35" + 13 dígitos del índice
-        String prefix = "35"; // TAC genérico
-        String body = String.format("%013d", i); // rellena con ceros a la izquierda
-        return prefix + body; // total 15 dígitos
+        String prefix = "35";
+        String body = String.format("%013d", i);
+        return prefix + body;
     }
 
     private String randomSerial() {
@@ -145,8 +146,8 @@ public class DeviceDataLoader {
     private Long assignEmployeeId(DeviceStatus status) {
         if (status != DeviceStatus.ASSIGNED) return null;
 
-        if (random.nextInt(100) < 70) { // 70% asignados
-            return (long) (1 + random.nextInt(150)); // 1..150
+        if (random.nextInt(100) < 70) {
+            return (long) (1 + random.nextInt(150));
         }
         return null;
     }
@@ -155,8 +156,8 @@ public class DeviceDataLoader {
         if (status != DeviceStatus.ASSIGNED) return null;
         if (employeeId == null) return null;
 
-        if (random.nextInt(100) < 70) { // 70% llevan línea
-            return (long) (1 + random.nextInt(250)); // 1..250
+        if (random.nextInt(100) < 70) {
+            return (long) (1 + random.nextInt(250));
         }
         return null;
     }

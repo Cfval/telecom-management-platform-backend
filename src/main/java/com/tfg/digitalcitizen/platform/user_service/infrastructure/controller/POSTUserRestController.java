@@ -7,7 +7,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +25,10 @@ public class POSTUserRestController {
             @ApiResponse(responseCode = "400", description = "Invalid user data")
     })
     @PostMapping("/users")
-    public ResponseEntity<ApiSuccessResponse<UserDto>> create(@RequestBody UserDto dto, HttpServletRequest request) {
+    public ResponseEntity<ApiSuccessResponse<UserDto>> create(@Valid @RequestBody UserDto dto, HttpServletRequest request) {
 
         UserDto saved = useCase.invoke(dto);
 
-        return ResponseEntity.status(201).body(ApiSuccessResponse.of(saved, 201, request.getRequestURI()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiSuccessResponse.of(saved, 201, request.getRequestURI()));
     }
 }
