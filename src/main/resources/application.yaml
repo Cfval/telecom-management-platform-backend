@@ -23,6 +23,9 @@ springdoc:
     description: REST API documentation for client management
     version: 1.0.0
 
+cors:
+  allowed-origin: ${CORS_ALLOWED_ORIGIN:http://localhost:5173}
+
 services:
   client-url: ${CLIENT_SERVICE_URL:http://localhost:8080}
   device-url: ${DEVICE_SERVICE_URL:http://localhost:8080}
