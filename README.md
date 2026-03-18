@@ -13,7 +13,7 @@ A RESTful backend for managing corporate mobile assets — clients, employees, d
 | Service | URL |
 |---|---|
 | Swagger UI | https://digital-citizen-api.onrender.com/swagger-ui/index.html |
-| Frontend (React) | https://digital-citizen-app.onrender.com/landing |
+| Frontend (React) | https://digital-citizen-app.onrender.com |
 
 ---
 
