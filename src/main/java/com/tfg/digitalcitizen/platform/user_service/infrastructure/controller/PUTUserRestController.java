@@ -4,6 +4,7 @@ import com.tfg.digitalcitizen.platform.shared.api.ApiSuccessResponse;
 import com.tfg.digitalcitizen.platform.user_service.application.PUTUserUseCase;
 import com.tfg.digitalcitizen.platform.user_service.application.dto.UserDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Employees")
 @RestController
 @RequiredArgsConstructor
 public class PUTUserRestController {

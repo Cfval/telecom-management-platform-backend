@@ -6,12 +6,14 @@ import com.tfg.digitalcitizen.platform.device_service.application.mapper.DeviceM
 import com.tfg.digitalcitizen.platform.device_service.application.model.DeviceByIdUseCaseResponse;
 import com.tfg.digitalcitizen.platform.device_service.infrastructure.controller.dto.DeviceResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Devices")
 @RestController
 @RequiredArgsConstructor
 public class GETDeviceByIdRestController {

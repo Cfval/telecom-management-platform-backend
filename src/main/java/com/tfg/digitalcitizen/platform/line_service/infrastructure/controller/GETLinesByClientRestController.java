@@ -7,6 +7,7 @@ import com.tfg.digitalcitizen.platform.line_service.application.model.LinesUseCa
 import com.tfg.digitalcitizen.platform.line_service.infrastructure.controller.dto.LineResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Lines")
 @RestController
 @RequiredArgsConstructor
 public class GETLinesByClientRestController {

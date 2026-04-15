@@ -4,6 +4,7 @@ import com.tfg.digitalcitizen.platform.device_service.application.POSTDeviceUseC
 import com.tfg.digitalcitizen.platform.device_service.application.dto.DeviceDto;
 import com.tfg.digitalcitizen.platform.shared.api.ApiSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Devices")
 @RestController
 @RequiredArgsConstructor
 public class POSTDeviceRestController {

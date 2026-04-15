@@ -6,6 +6,7 @@ import com.tfg.digitalcitizen.platform.device_service.application.mapper.DeviceM
 import com.tfg.digitalcitizen.platform.device_service.application.model.DevicesUseCaseResponse;
 import com.tfg.digitalcitizen.platform.device_service.infrastructure.controller.dto.DevicesResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Tag(name = "Devices")
 @RestController
 @RequiredArgsConstructor
 public class GETAllDevicesRestController {

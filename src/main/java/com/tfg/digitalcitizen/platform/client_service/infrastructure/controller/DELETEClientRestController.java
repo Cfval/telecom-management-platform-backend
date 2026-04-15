@@ -3,6 +3,7 @@ package com.tfg.digitalcitizen.platform.client_service.infrastructure.controller
 import com.tfg.digitalcitizen.platform.client_service.application.DELETEClientUseCase;
 import com.tfg.digitalcitizen.platform.shared.api.ApiDeleteResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Clients")
 @RestController
 @RequiredArgsConstructor
 public class DELETEClientRestController {

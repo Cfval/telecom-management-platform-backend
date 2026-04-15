@@ -4,6 +4,7 @@ import com.tfg.digitalcitizen.platform.line_service.application.PUTLineUseCase;
 import com.tfg.digitalcitizen.platform.line_service.application.dto.LineDto;
 import com.tfg.digitalcitizen.platform.shared.api.ApiSuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Lines")
 @RestController
 @RequiredArgsConstructor
 public class PUTLineRestController {

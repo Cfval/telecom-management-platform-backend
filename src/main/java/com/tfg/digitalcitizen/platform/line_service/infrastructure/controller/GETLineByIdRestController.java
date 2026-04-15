@@ -6,6 +6,7 @@ import com.tfg.digitalcitizen.platform.line_service.application.mapper.LineMappe
 import com.tfg.digitalcitizen.platform.line_service.application.model.LineByIdUseCaseResponse;
 import com.tfg.digitalcitizen.platform.line_service.infrastructure.controller.dto.LineByIdResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 
+@Tag(name = "Lines")
 @RestController
 @RequiredArgsConstructor
 public class GETLineByIdRestController {

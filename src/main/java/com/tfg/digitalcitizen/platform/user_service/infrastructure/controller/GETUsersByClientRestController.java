@@ -7,6 +7,7 @@ import com.tfg.digitalcitizen.platform.user_service.application.model.UsersUseCa
 import com.tfg.digitalcitizen.platform.user_service.infrastructure.controller.dto.UsersResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Employees")
 @RestController
 @RequiredArgsConstructor
 public class GETUsersByClientRestController {
